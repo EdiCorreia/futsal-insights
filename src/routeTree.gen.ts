@@ -10,9 +10,12 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ConfiguracoesRouteImport } from './routes/configuracoes'
 import { Route as DesempenhoRouteImport } from './routes/desempenho'
 import { Route as EquipesRouteImport } from './routes/equipes'
+import { Route as PdiRouteImport } from './routes/pdi'
 import { Route as RelatoriosRouteImport } from './routes/relatorios'
+import { Route as TreinamentosRouteImport } from './routes/treinamentos'
 import { Route as AtletasIndexRouteImport } from './routes/atletas.index'
 import { Route as AtletasAthleteIdRouteImport } from './routes/atletas.$athleteId'
 import { Route as PartidasIndexRouteImport } from './routes/partidas.index'
@@ -25,6 +28,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConfiguracoesRoute = ConfiguracoesRouteImport.update({
+  id: '/configuracoes',
+  path: '/configuracoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DesempenhoRoute = DesempenhoRouteImport.update({
   id: '/desempenho',
   path: '/desempenho',
@@ -35,9 +43,19 @@ const EquipesRoute = EquipesRouteImport.update({
   path: '/equipes',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PdiRoute = PdiRouteImport.update({
+  id: '/pdi',
+  path: '/pdi',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RelatoriosRoute = RelatoriosRouteImport.update({
   id: '/relatorios',
   path: '/relatorios',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TreinamentosRoute = TreinamentosRouteImport.update({
+  id: '/treinamentos',
+  path: '/treinamentos',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AtletasIndexRoute = AtletasIndexRouteImport.update({
@@ -73,9 +91,12 @@ const ScoutMatchIdRoute = ScoutMatchIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/configuracoes': typeof ConfiguracoesRoute
   '/desempenho': typeof DesempenhoRoute
   '/equipes': typeof EquipesRoute
+  '/pdi': typeof PdiRoute
   '/relatorios': typeof RelatoriosRoute
+  '/treinamentos': typeof TreinamentosRoute
   '/atletas/$athleteId': typeof AtletasAthleteIdRoute
   '/partidas/$matchId': typeof PartidasMatchIdRoute
   '/scout/$matchId': typeof ScoutMatchIdRoute
@@ -85,9 +106,12 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/configuracoes': typeof ConfiguracoesRoute
   '/desempenho': typeof DesempenhoRoute
   '/equipes': typeof EquipesRoute
+  '/pdi': typeof PdiRoute
   '/relatorios': typeof RelatoriosRoute
+  '/treinamentos': typeof TreinamentosRoute
   '/atletas/$athleteId': typeof AtletasAthleteIdRoute
   '/partidas/$matchId': typeof PartidasMatchIdRoute
   '/scout/$matchId': typeof ScoutMatchIdRoute
@@ -98,9 +122,12 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/configuracoes': typeof ConfiguracoesRoute
   '/desempenho': typeof DesempenhoRoute
   '/equipes': typeof EquipesRoute
+  '/pdi': typeof PdiRoute
   '/relatorios': typeof RelatoriosRoute
+  '/treinamentos': typeof TreinamentosRoute
   '/atletas/$athleteId': typeof AtletasAthleteIdRoute
   '/partidas/$matchId': typeof PartidasMatchIdRoute
   '/scout/$matchId': typeof ScoutMatchIdRoute
@@ -112,9 +139,12 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/configuracoes'
     | '/desempenho'
     | '/equipes'
+    | '/pdi'
     | '/relatorios'
+    | '/treinamentos'
     | '/atletas/$athleteId'
     | '/partidas/$matchId'
     | '/scout/$matchId'
@@ -124,9 +154,12 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/configuracoes'
     | '/desempenho'
     | '/equipes'
+    | '/pdi'
     | '/relatorios'
+    | '/treinamentos'
     | '/atletas/$athleteId'
     | '/partidas/$matchId'
     | '/scout/$matchId'
@@ -136,9 +169,12 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/configuracoes'
     | '/desempenho'
     | '/equipes'
+    | '/pdi'
     | '/relatorios'
+    | '/treinamentos'
     | '/atletas/$athleteId'
     | '/partidas/$matchId'
     | '/scout/$matchId'
@@ -149,9 +185,12 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ConfiguracoesRoute: typeof ConfiguracoesRoute
   DesempenhoRoute: typeof DesempenhoRoute
   EquipesRoute: typeof EquipesRoute
+  PdiRoute: typeof PdiRoute
   RelatoriosRoute: typeof RelatoriosRoute
+  TreinamentosRoute: typeof TreinamentosRoute
   AtletasAthleteIdRoute: typeof AtletasAthleteIdRoute
   PartidasMatchIdRoute: typeof PartidasMatchIdRoute
   ScoutMatchIdRoute: typeof ScoutMatchIdRoute
@@ -169,6 +208,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/configuracoes': {
+      id: '/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/configuracoes'
+      preLoaderRoute: typeof ConfiguracoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/desempenho': {
       id: '/desempenho'
       path: '/desempenho'
@@ -183,11 +229,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EquipesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pdi': {
+      id: '/pdi'
+      path: '/pdi'
+      fullPath: '/pdi'
+      preLoaderRoute: typeof PdiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/relatorios': {
       id: '/relatorios'
       path: '/relatorios'
       fullPath: '/relatorios'
       preLoaderRoute: typeof RelatoriosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/treinamentos': {
+      id: '/treinamentos'
+      path: '/treinamentos'
+      fullPath: '/treinamentos'
+      preLoaderRoute: typeof TreinamentosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/atletas/': {
@@ -237,9 +297,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ConfiguracoesRoute: ConfiguracoesRoute,
   DesempenhoRoute: DesempenhoRoute,
   EquipesRoute: EquipesRoute,
+  PdiRoute: PdiRoute,
   RelatoriosRoute: RelatoriosRoute,
+  TreinamentosRoute: TreinamentosRoute,
   AtletasAthleteIdRoute: AtletasAthleteIdRoute,
   PartidasMatchIdRoute: PartidasMatchIdRoute,
   ScoutMatchIdRoute: ScoutMatchIdRoute,
