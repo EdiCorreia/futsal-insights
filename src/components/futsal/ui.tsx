@@ -179,7 +179,7 @@ export function SimpleLine({
       <LineChart data={data}>
         <CartesianGrid stroke="var(--border)" vertical={false} />
         <XAxis dataKey="label" tick={axisStyle} axisLine={false} tickLine={false} />
-        <YAxis tick={axisStyle} axisLine={false} tickLine={false} width={30} domain={domain} />
+        <YAxis tick={axisStyle} axisLine={false} tickLine={false} width={30} {...(domain ? { domain } : {})} />
         <Tooltip contentStyle={tooltipStyle} />
         {keys.length > 1 ? <Legend wrapperStyle={{ fontSize: 12 }} /> : null}
         {keys.map((k) => (
