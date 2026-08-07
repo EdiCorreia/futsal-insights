@@ -26,7 +26,7 @@ import {
 import { actions, useDB } from "@/lib/futsal/store";
 import { teamMatchStats } from "@/lib/futsal/stats";
 
-export const Route = createFileRoute("/partidas")({
+export const Route = createFileRoute("/partidas/")({
   head: () => ({
     meta: [
       { title: "Partidas | Futsal Scout" },
