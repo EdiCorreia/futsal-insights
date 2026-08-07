@@ -158,7 +158,7 @@ export function athleteSummary(db: DB, athleteId: string, lastN = 99): AthleteSu
     const min = mps.find((p) => p.matchId === m.id)?.minutesPlayed ?? 0;
     const ph = physRows.find((p) => p.matchId === m.id);
     return {
-      label: m.opponent.split(" ")[0],
+      label: m.opponent.split(" ")[0] ?? m.opponent,
       nota: matchGrade(mCounts, min),
       passes: passAccuracy(mCounts),
       intensidade: ph ? ph.sprints : 0,
@@ -361,12 +361,14 @@ export function teamInsights(db: DB, teamId: string): { athlete: string; text: s
     const h = s.gradeHistory;
     if (h.length >= 4) {
       const recent = h.slice(-4);
-      const rising = recent.every((g, i) => i === 0 || g.passes >= recent[i - 1].passes - 1);
-      if (rising && recent[3].passes - recent[0].passes > 4)
+      const rising = recent.every((g, i) => i === 0 || g.passes >= (recent[i - 1]?.passes ?? 0) - 1);
+      const firstP = recent[0]?.passes ?? 0;
+      const lastP = recent[3]?.passes ?? 0;
+      if (rising && lastP - firstP > 4)
         out.push({
           athlete: s.athlete.name,
           tone: "positive",
-          text: `${s.athlete.name} apresenta evolução consistente nos passes nas últimas quatro partidas (${recent[0].passes}% → ${recent[3].passes}%).`,
+          text: `${s.athlete.name} apresenta evolução consistente nos passes nas últimas quatro partidas (${firstP}% → ${lastP}%).`,
         });
     }
     const secondHalfEvents = db.events.filter((e) => e.athleteId === s.athlete.id && e.period === 2).length;
