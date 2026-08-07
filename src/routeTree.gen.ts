@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EquipesRouteImport } from './routes/equipes'
+import { Route as AtletasIndexRouteImport } from './routes/atletas.index'
+import { Route as AtletasAthleteIdRouteImport } from './routes/atletas.$athleteId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +24,49 @@ const EquipesRoute = EquipesRouteImport.update({
   path: '/equipes',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AtletasIndexRoute = AtletasIndexRouteImport.update({
+  id: '/atletas/',
+  path: '/atletas/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AtletasAthleteIdRoute = AtletasAthleteIdRouteImport.update({
+  id: '/atletas/$athleteId',
+  path: '/atletas/$athleteId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/equipes': typeof EquipesRoute
+  '/atletas/$athleteId': typeof AtletasAthleteIdRoute
+  '/atletas/': typeof AtletasIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/equipes': typeof EquipesRoute
+  '/atletas/$athleteId': typeof AtletasAthleteIdRoute
+  '/atletas': typeof AtletasIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/equipes': typeof EquipesRoute
+  '/atletas/$athleteId': typeof AtletasAthleteIdRoute
+  '/atletas/': typeof AtletasIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/equipes'
+  fullPaths: '/' | '/equipes' | '/atletas/$athleteId' | '/atletas/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/equipes'
-  id: '__root__' | '/' | '/equipes'
+  to: '/' | '/equipes' | '/atletas/$athleteId' | '/atletas'
+  id: '__root__' | '/' | '/equipes' | '/atletas/$athleteId' | '/atletas/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EquipesRoute: typeof EquipesRoute
+  AtletasAthleteIdRoute: typeof AtletasAthleteIdRoute
+  AtletasIndexRoute: typeof AtletasIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +85,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EquipesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/atletas/': {
+      id: '/atletas/'
+      path: '/atletas'
+      fullPath: '/atletas/'
+      preLoaderRoute: typeof AtletasIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/atletas/$athleteId': {
+      id: '/atletas/$athleteId'
+      path: '/atletas/$athleteId'
+      fullPath: '/atletas/$athleteId'
+      preLoaderRoute: typeof AtletasAthleteIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EquipesRoute: EquipesRoute,
+  AtletasAthleteIdRoute: AtletasAthleteIdRoute,
+  AtletasIndexRoute: AtletasIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

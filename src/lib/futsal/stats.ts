@@ -60,7 +60,7 @@ export function matchGrade(counts: Counts, minutes: number): number {
 
 const clamp = (v: number) => Math.max(0, Math.min(100, Math.round(v)));
 
-export interface RadarSkills {
+export interface RadarSkills extends Record<string, number> {
   Passe: number;
   Finalização: number;
   Defesa: number;

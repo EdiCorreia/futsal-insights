@@ -28,7 +28,7 @@ import { actions, useDB } from "@/lib/futsal/store";
 import { POSITIONS, type Foot, type Position } from "@/lib/futsal/types";
 import { age, athleteSummary } from "@/lib/futsal/stats";
 
-export const Route = createFileRoute("/atletas")({
+export const Route = createFileRoute("/atletas/")({
   head: () => ({
     meta: [
       { title: "Atletas | Futsal Scout" },
