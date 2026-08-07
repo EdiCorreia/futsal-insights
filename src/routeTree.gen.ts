@@ -10,7 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DesempenhoRouteImport } from './routes/desempenho'
 import { Route as EquipesRouteImport } from './routes/equipes'
+import { Route as RelatoriosRouteImport } from './routes/relatorios'
 import { Route as AtletasIndexRouteImport } from './routes/atletas.index'
 import { Route as AtletasAthleteIdRouteImport } from './routes/atletas.$athleteId'
 import { Route as PartidasIndexRouteImport } from './routes/partidas.index'
@@ -23,9 +25,19 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DesempenhoRoute = DesempenhoRouteImport.update({
+  id: '/desempenho',
+  path: '/desempenho',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EquipesRoute = EquipesRouteImport.update({
   id: '/equipes',
   path: '/equipes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RelatoriosRoute = RelatoriosRouteImport.update({
+  id: '/relatorios',
+  path: '/relatorios',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AtletasIndexRoute = AtletasIndexRouteImport.update({
@@ -61,7 +73,9 @@ const ScoutMatchIdRoute = ScoutMatchIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/desempenho': typeof DesempenhoRoute
   '/equipes': typeof EquipesRoute
+  '/relatorios': typeof RelatoriosRoute
   '/atletas/$athleteId': typeof AtletasAthleteIdRoute
   '/partidas/$matchId': typeof PartidasMatchIdRoute
   '/scout/$matchId': typeof ScoutMatchIdRoute
@@ -71,7 +85,9 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/desempenho': typeof DesempenhoRoute
   '/equipes': typeof EquipesRoute
+  '/relatorios': typeof RelatoriosRoute
   '/atletas/$athleteId': typeof AtletasAthleteIdRoute
   '/partidas/$matchId': typeof PartidasMatchIdRoute
   '/scout/$matchId': typeof ScoutMatchIdRoute
@@ -82,7 +98,9 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/desempenho': typeof DesempenhoRoute
   '/equipes': typeof EquipesRoute
+  '/relatorios': typeof RelatoriosRoute
   '/atletas/$athleteId': typeof AtletasAthleteIdRoute
   '/partidas/$matchId': typeof PartidasMatchIdRoute
   '/scout/$matchId': typeof ScoutMatchIdRoute
@@ -94,7 +112,9 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/desempenho'
     | '/equipes'
+    | '/relatorios'
     | '/atletas/$athleteId'
     | '/partidas/$matchId'
     | '/scout/$matchId'
@@ -104,7 +124,9 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/desempenho'
     | '/equipes'
+    | '/relatorios'
     | '/atletas/$athleteId'
     | '/partidas/$matchId'
     | '/scout/$matchId'
@@ -114,7 +136,9 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/desempenho'
     | '/equipes'
+    | '/relatorios'
     | '/atletas/$athleteId'
     | '/partidas/$matchId'
     | '/scout/$matchId'
@@ -125,7 +149,9 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DesempenhoRoute: typeof DesempenhoRoute
   EquipesRoute: typeof EquipesRoute
+  RelatoriosRoute: typeof RelatoriosRoute
   AtletasAthleteIdRoute: typeof AtletasAthleteIdRoute
   PartidasMatchIdRoute: typeof PartidasMatchIdRoute
   ScoutMatchIdRoute: typeof ScoutMatchIdRoute
@@ -143,11 +169,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/desempenho': {
+      id: '/desempenho'
+      path: '/desempenho'
+      fullPath: '/desempenho'
+      preLoaderRoute: typeof DesempenhoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/equipes': {
       id: '/equipes'
       path: '/equipes'
       fullPath: '/equipes'
       preLoaderRoute: typeof EquipesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/relatorios': {
+      id: '/relatorios'
+      path: '/relatorios'
+      fullPath: '/relatorios'
+      preLoaderRoute: typeof RelatoriosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/atletas/': {
@@ -197,7 +237,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DesempenhoRoute: DesempenhoRoute,
   EquipesRoute: EquipesRoute,
+  RelatoriosRoute: RelatoriosRoute,
   AtletasAthleteIdRoute: AtletasAthleteIdRoute,
   PartidasMatchIdRoute: PartidasMatchIdRoute,
   ScoutMatchIdRoute: ScoutMatchIdRoute,
